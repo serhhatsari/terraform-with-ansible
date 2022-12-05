@@ -1,0 +1,6 @@
+---
+- name: Configure Droplet
+  hosts: dev # dev environment
+  become: yes
+  roles:
+  - common
