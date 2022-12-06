@@ -19,13 +19,9 @@ resource "digitalocean_droplet" "web" {
   region = "fra1"
   size   = "s-1vcpu-1gb"
   ssh_keys = var.ssh_keys
-
-  provisioner "local-exec" {
-    command = "ansible-playbook -u root -i ./inventory/hosts.ini --private-key ~/.ssh/id_rsa main.yml"
-  }
 }
 
- resource "local_file" "ansible_inventory" {
+resource "local_file" "ansible_inventory" {
   content = templatefile("./inventory/inventory.tmpl",
     {
      ip = digitalocean_droplet.web.ipv4_address
